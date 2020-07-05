@@ -1,6 +1,24 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
-const Transactions = () => {
+import { getSum, getTotal } from '../actions/checkoutActions';
+
+const Transactions = ({
+  pickupDiscount,
+  getSum,
+  cartItems,
+  sum,
+
+  getTotal,
+}) => {
+  const vat = 0.13 * sum;
+
+  React.useEffect(() => {
+    getSum(cartItems);
+  }, []);
+
+  const total = sum - pickupDiscount + vat;
+
   const tooltipText = 'Pick up your order from our store to cut cost.';
   return (
     <>
@@ -15,7 +33,7 @@ const Transactions = () => {
         <tbody>
           <tr>
             <td>Sum</td>
-            <td> $100</td>
+            <td> ${sum}</td>
           </tr>
           <tr>
             <td>
@@ -27,17 +45,24 @@ const Transactions = () => {
                 Pickup savings
               </span>
             </td>
-            <td className="red-text lighten-1">-$20</td>
+            <td className="red-text lighten-1">-${pickupDiscount}</td>
           </tr>
           <tr>
             <td>VAT 13%</td>
-            <td> $23</td>
+            <td> ${vat}</td>
           </tr>
         </tbody>
       </table>
-      <h3 className="center-align">Total: $50</h3>
+      <h3 className="center-align">Total: ${total}</h3>
     </>
   );
 };
 
-export default Transactions;
+const mapStateToProps = (state) => ({
+  pickupDiscount: state.checkout.pickupDiscount,
+  cartItems: state.checkout.cartItems,
+  sum: state.checkout.sum,
+  // total: state.checkout.total,
+});
+
+export default connect(mapStateToProps, { getSum, getTotal })(Transactions);

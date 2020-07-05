@@ -20,7 +20,6 @@ const ItemDetails = ({ cartItems }) => {
               <Items cartItems={cartItems} />
             </tbody>
           </table>
-          {/* <span>Lorem ipsum dolor sit amet.</span> */}
         </div>
       </li>
     </ul>
