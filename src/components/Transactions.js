@@ -14,6 +14,7 @@ const Transactions = ({
 
   React.useEffect(() => {
     getSum(cartItems);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const total = sum - pickupDiscount + vat;
