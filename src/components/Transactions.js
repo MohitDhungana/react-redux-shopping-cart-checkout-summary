@@ -1,15 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { getSum, getTotal } from '../actions/checkoutActions';
+import { getSum } from '../actions/checkoutActions';
 
 const Transactions = ({
   pickupDiscount,
   getSum,
   cartItems,
   sum,
-
-  getTotal,
+  disableDiscount,
 }) => {
   const vat = 0.13 * sum;
 
@@ -53,7 +52,9 @@ const Transactions = ({
           </tr>
         </tbody>
       </table>
-      <h3 className="center-align">Total: ${total}</h3>
+      <h3 className="center-align">
+        Total: ${disableDiscount ? total - 10 : total}
+      </h3>
     </>
   );
 };
@@ -62,7 +63,7 @@ const mapStateToProps = (state) => ({
   pickupDiscount: state.checkout.pickupDiscount,
   cartItems: state.checkout.cartItems,
   sum: state.checkout.sum,
-  // total: state.checkout.total,
+  disableDiscount: state.checkout.disableDiscount,
 });
 
-export default connect(mapStateToProps, { getSum, getTotal })(Transactions);
+export default connect(mapStateToProps, { getSum })(Transactions);

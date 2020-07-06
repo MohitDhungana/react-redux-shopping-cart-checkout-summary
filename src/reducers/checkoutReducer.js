@@ -1,4 +1,4 @@
-import { GET_SUM, GET_TOTAL } from '../actions/types';
+import { GET_SUM, TYPE_PROMO, TOGGLE_PROMO_BTN } from '../actions/types';
 
 const initialState = {
   cartItems: [
@@ -18,7 +18,6 @@ const initialState = {
   disableDiscount: false,
   promoCode: '',
   sum: 0,
-  total: 0,
   pickupDiscount: 22,
 };
 
@@ -29,11 +28,17 @@ export default (state = initialState, action) => {
         ...state,
         sum: action.payload,
       };
-    case GET_TOTAL:
+    case TYPE_PROMO:
       return {
         ...state,
-        total: action.payload,
+        promoCode: action.payload,
       };
+    case TOGGLE_PROMO_BTN:
+      return {
+        ...state,
+        disableDiscount: !action.payload,
+      };
+
     default:
       return state;
   }

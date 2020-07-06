@@ -1,5 +1,3 @@
 export const GET_SUM = 'GET_SUM';
-export const GET_TOTAL = 'GET_TOTAL';
-export const GET_ITEMS = 'GET_ITEMS';
-export const SHOW_PROMO = 'SHOW_PROMO';
-export const APPLY_PROMO = 'APPLY_PROMO';
+export const TOGGLE_PROMO_BTN = 'TOGGLE_PROMO_BTN';
+export const TYPE_PROMO = 'TYPE_PROMO';
